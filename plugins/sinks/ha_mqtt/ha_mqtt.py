@@ -46,6 +46,7 @@ def execute(config, get_items, register_callback, do_stop):
     global mqtt_settings
     mqtt_settings = Settings.MQTT(
         host=config["server"]["address"],
+        port=os.environ.get("HA_MQTT_PORT", 1883),
         username=config["server"]["username"],
         password=config["server"]["password"],
         discovery_prefix=config["behavior"]["sensorprefix"],
