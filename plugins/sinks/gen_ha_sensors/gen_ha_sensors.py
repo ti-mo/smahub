@@ -1,6 +1,6 @@
+import logging
 import os
 import time
-import logging
 
 
 def env_vars(config):

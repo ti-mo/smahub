@@ -1,6 +1,7 @@
+import logging
 import os
 import time
-import logging
+
 from utils.smasensors import register_sensor_dict
 
 

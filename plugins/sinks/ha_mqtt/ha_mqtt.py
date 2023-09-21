@@ -1,13 +1,13 @@
+import logging
 import os
 import time
-import logging
 from collections import defaultdict
+
 import ha_mqtt_discoverable
 from ha_mqtt_discoverable import Settings
-from ha_mqtt_discoverable.sensors import SensorInfo, Sensor, DeviceInfo
-from utils.smasensors import *
-from utils.smahelpers import *
-
+from ha_mqtt_discoverable.sensors import DeviceInfo, Sensor, SensorInfo
+from utils.smahelpers import status_string
+from utils.smasensors import get_sensor_dict
 
 # store for all the ha_mqtt sensor objects
 sensors = defaultdict(Sensor)

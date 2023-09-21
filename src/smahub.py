@@ -1,12 +1,14 @@
+import argparse
+import asyncio
+import configparser
 import importlib
 import importlib.metadata
-import argparse
-import configparser
-import asyncio
+import logging
 import os
 import signal
-import logging
+
 import debugpy
+
 from smadict import SMA_Dict
 
 # Configure logging to print warn-level messages to the console

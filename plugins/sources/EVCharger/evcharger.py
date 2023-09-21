@@ -5,10 +5,11 @@ Thank you littleyoda!
 import logging
 import os
 import time
+
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-from utils.smahelpers import parameter_unit, isfloat
+from utils.smahelpers import isfloat, parameter_unit
 
 
 def env_vars(config):

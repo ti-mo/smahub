@@ -6,8 +6,9 @@ import logging
 import os
 import socket
 import struct
-from utils.speedwiredecoder import decode_speedwire
+
 from utils.smasensors import register_sensor_dict
+from utils.speedwiredecoder import decode_speedwire
 
 
 def env_vars(config):
