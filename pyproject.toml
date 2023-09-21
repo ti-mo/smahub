@@ -1,28 +1,29 @@
-[build-system]
-build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.8.0,<4"]
-
-[project]
+[tool.poetry]
 name = "smahub"
 version = "1.2.5"
-authors = [{ name = "Daniel Krippner", email = "dk.mailbox@gmx.net" }]
 description = "Little daemon that runs plugins for collecting data from SMA PV products, and publishes to eg MQTT via other plugins."
+authors = ["Daniel Krippner <dk.mailbox@gmx.net>"]
+license = "GPL-2.0-only"
 readme = "README.md"
-requires-python = ">=3.8"
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.8",
-]
-dependencies = [
-    "requests ~=2.31.0",
-    "urllib3 ~=2.0.3",
-    "paho-mqtt ~=1.6.1",
-    "ha_mqtt_discoverable ~=0.9",
-    "debugpy ~=1.6",
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.10",
 ]
 
-[tool.pytest.ini_options]
-pythonpath = ["src"]
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.31.0"
+paho-mqtt = "^1.6.1"
+ha-mqtt-discoverable = "^0.9.0"
+debugpy = "^1.8.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+flake8 = "^6.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

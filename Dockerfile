@@ -2,15 +2,14 @@ FROM alpine:3
 
 # Prepare base system
 RUN apk update && apk upgrade && \
-    apk add python3 py3-pip git 
+    apk add python3 poetry git
 
 # Install smahub
 RUN mkdir -p /opt/smahub
 WORKDIR /opt/smahub
+COPY . /opt/smahub
 
-RUN git clone --depth=1 --branch=main https://github.com/AnotherDaniel/smahub . && rm -fr .git*
-#COPY . /opt/smahub
-RUN pip3 install .
+RUN POETRY_VIRTUALENVS_CREATE=false poetry install
 
 # Debug server port
 EXPOSE 5678
