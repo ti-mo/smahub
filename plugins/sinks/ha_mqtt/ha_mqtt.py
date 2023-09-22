@@ -25,7 +25,7 @@ def env_vars(config):
     if os.environ.get("HA_MQTT_PASSWORD"):
         config["server"]["password"] = os.environ.get("HA_MQTT_PASSWORD")
     if os.environ.get("HA_MQTT_UPDATEFREQ"):
-        config["behavior"]["updatefreq"] = int(os.environ.get("HA_MQTT_UPDATEFREQ"))
+        config["behavior"]["updatefreq"] = os.environ.get("HA_MQTT_UPDATEFREQ")
     if os.environ.get("HA_MQTT_PREFIX"):
         config["behavior"]["sensorprefix"] = os.environ.get("HA_MQTT_PREFIX")
 
@@ -165,10 +165,23 @@ def publish(sensor, value):
     sensor.set_state(publish_value)
 
 
+# dict of sensor to the last time it was sent
+cooldown = {}
+
+
 def my_callback(key, value):
     # device info data is not explicitly published in ha_mqtt
     if "device_info" in key:
         return
     sensor = sensors.get(key)
-    if sensor is not None:
-        publish(sensor, value)
+    if sensor is None:
+        return
+
+    # skip publishing if the sensor was updated in the past 10 seconds
+    now = time.time()
+    last = cooldown.get(sensor)
+    if last is not None and (now - last) < 10:
+        return
+
+    cooldown[sensor] = now
+    publish(sensor, value)
